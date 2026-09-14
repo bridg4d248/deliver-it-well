@@ -37,4 +37,15 @@ describe('server/app.js', function() {
       done();
     });
   });
+
+    it('page contains the expected content', (done) => {
+      const EXPECTED_CONTENT = 'You\'re serving up the public folder, but do your tests pass?';
+  chai.request(server)
+    .get('/')
+    .end((err, res) => {
+      expect(err).not.exist;
+      expect(JSON.stringify(res.text)).to.contain(EXPECTED_CONTENT);
+      done();
+    });
+  });
 })
